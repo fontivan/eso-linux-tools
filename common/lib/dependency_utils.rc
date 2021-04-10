@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# MIT License
+#
+# Copyright (c) 2021 fontivan
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+########################################################################################################################
+
+########################################################################################################################
+# function ValidateDependencies()
+#
+# Description:
+#   Validate that the necessary dependencies for this script are available. Presently this checks that `curl`, `sed`,
+#   and `unzip` are available on the system path.
+# Returns:
+#   0 - If all necessary dependencies were found successfully.
+#   1 - If any of the necessary dependenccies could not be found.
+########################################################################################################################
+function ValidateDependencies(){
+
+    # If an error occurs then this will be flagged to 1 instead
+    local returnCode
+    returnCode="0"
+
+    # Check if curl is available
+    if ! 2>/dev/null 1>/dev/null which curl
+    then
+        PrintError "The program 'curl' is required but could not be found."
+        returnCode="1"
+    fi
+
+    # Check if sed is available
+    if ! 2>/dev/null 1>/dev/null which sed
+    then
+        PrintError "The program 'sed' is required but could not be found."
+        returnCode="1"
+    fi
+
+    # Check if unzip is available
+    if ! 2>/dev/null 1>/dev/null which unzip
+    then
+        PrintError "The program 'unzip' is required but could not be found."
+        returnCode="1"
+    fi
+
+    # If no error has occured this will still be 0
+    return "${returnCode}"
+}

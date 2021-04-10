@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# MIT License
+#
+# Copyright (c) 2021 fontivan
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+########################################################################################################################
+
+########################################################################################################################
+# function PrintMessage()
+#
+# Description:
+#   Print a message to stdout prefixed with a timestamp.
+# Inputs:
+#   $1 - The message to be printed
+########################################################################################################################
+function PrintMessage(){
+    # Print a timestamp followed by the requested message
+    echo "$(date +'[%m/%d/%Y] [%H:%M:%S]') ${1}"
+}
+
+########################################################################################################################
+# function PrintError()
+#
+# Description:
+#   Print a message to stdout with the [ERROR] tag.
+# Inputs:
+#   $1 - The message to be printed
+########################################################################################################################
+function PrintError(){
+    # Print an error message
+    PrintMessage "[ERROR] ${1}"
+}
+
+########################################################################################################################
+# function PrintInfo()
+#
+# Description:
+#   Print a message to stdout with the [INFO] tag.
+########################################################################################################################
+function PrintInfo(){
+    # Print an info message
+    PrintMessage "[INFO] ${1}"
+}
+
+########################################################################################################################
+# function ReportErrorAndExit()
+#
+# Description:
+#   Print a message stating that a fatal error has occured and call exit with a non zero status code.
+########################################################################################################################
+function ReportErrorAndExit(){
+
+    # A fatal error has occured and we need to exit immediately
+    PrintError "A fatal error has occured."
+	exit 1
+}
