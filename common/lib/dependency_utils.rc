@@ -40,6 +40,13 @@ function ValidateDependencies(){
     local returnCode
     returnCode="0"
 
+    # Check if awk is available
+    if ! 2>/dev/null 1>/dev/null which awk
+    then
+        PrintError "The program 'awk' is required but could not be found."
+        returnCode="1"
+    fi
+
     # Check if curl is available
     if ! 2>/dev/null 1>/dev/null which curl
     then
