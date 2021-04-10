@@ -155,6 +155,10 @@ function ValidateInputs(){
     then
     PrintError "The configuration variable 'TTC_ADDON_DIR' is required but was not defined."
     returnCode="1"
+  elif [[ ! -d "${TTC_ADDON_DIR}" ]]
+  then
+    PrintError "The configuration variable 'TTC_ADDON_DIR' is defined but does not point to a valid directory."
+    returnCode="1"
   fi
   
   # Check if the TTC_DOWNLOAD_URL variable is set
